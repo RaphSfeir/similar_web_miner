@@ -2,7 +2,7 @@ defmodule SimilarWebMiner do
   alias SimilarWebMiner.Geography
 
   @moduledoc """
-  Documentation for SimilarWebMiner.
+  Client for calls to the Similar Web API, regarding geography repartition (for now).
   """
 
   @doc """
@@ -31,15 +31,15 @@ defmodule SimilarWebMiner do
     end
   end
 
-  def extract_records(%{"records" => records}) when is_list(records) do
+  defp extract_records(%{"records" => records}) when is_list(records) do
     {:ok, records}
   end
 
-  def post_process_call(%HTTPoison.Response{body: body, status_code: 200}) do
+  defp post_process_call(%HTTPoison.Response{body: body, status_code: 200}) do
     {:ok, body}
   end
 
-  def post_process_json_body(json_body) when is_binary(json_body) do
+  defp post_process_json_body(json_body) when is_binary(json_body) do
     Jason.decode(json_body)
   end
 
