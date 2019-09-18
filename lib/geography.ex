@@ -73,7 +73,6 @@ defmodule SimilarWebMiner.Geography do
         case filter_countries_by(code_int) do
           {:ok, country_name} ->
             country_name
-
           false ->
             false
         end
