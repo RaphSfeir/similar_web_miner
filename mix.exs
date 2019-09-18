@@ -38,11 +38,13 @@ defmodule SimilarWebMiner.MixProject do
       {:jason, "~> 1.1"}
     ]
   end
-  
+
   defp package() do
     [
       licenses: ["MIT"],
-      links: %{"Similar Web API" => "https://www.similarweb.com/corp/developer/estimated_visits_api"}
+      links: %{
+        "Similar Web API" => "https://www.similarweb.com/corp/developer/estimated_visits_api"
+      }
     ]
   end
 end

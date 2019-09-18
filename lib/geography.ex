@@ -10,17 +10,21 @@ defmodule SimilarWebMiner.Geography do
           "country" => country_code,
           "share" => share,
           "visits" => visits,
-          "pages_per_visit" => _pages_per_visit,
-          "average_time" => _average_time,
-          "bounce_rate" => _bounce_rate,
-          "rank" => _rank
+          "pages_per_visit" => pages_per_visit,
+          "average_time" => average_time,
+          "bounce_rate" => bounce_rate,
+          "rank" => rank
         }
       ) do
     %{
       country: get_country_by_code(country_code),
       country_code: country_code,
       share: share,
-      visits: visits
+      visits: visits,
+      pages_per_visit: pages_per_visit,
+      average_time: average_time,
+      bounce_rate: bounce_rate,
+      rank: rank
     }
   end
 
@@ -73,6 +77,7 @@ defmodule SimilarWebMiner.Geography do
         case filter_countries_by(code_int) do
           {:ok, country_name} ->
             country_name
+
           false ->
             false
         end

@@ -56,7 +56,11 @@ defmodule SimilarWebMinerTest do
              country: "France",
              country_code: 250,
              share: 0.7851,
-             visits: 2_540_038
+             visits: 2_540_038,
+             average_time: 199.01303489498287,
+             bounce_rate: 0.5190781739954348,
+             pages_per_visit: 3.4505905958407035,
+             rank: 783
            }
   end
 
@@ -69,7 +73,11 @@ defmodule SimilarWebMinerTest do
              country: "France",
              country_code: 250,
              share: 0.7851,
-             visits: 2_540_038
+             visits: 2_540_038,
+             average_time: 199.01303489498287,
+             bounce_rate: 0.5190781739954348,
+             pages_per_visit: 3.4505905958407035,
+             rank: 783
            }
   end
 end
