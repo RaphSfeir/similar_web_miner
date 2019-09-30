@@ -36,9 +36,11 @@ defmodule SimilarWebMiner do
   end
 
   defp extract_records(%{
-         "error_code" => error_code,
-         "error_message" => error_message,
-         "status" => "Error"
+         "meta" => %{
+           "error_code" => _error_code,
+           "error_message" => error_message,
+           "status" => "Error"
+         }
        }) do
     {:error, error_message}
   end
