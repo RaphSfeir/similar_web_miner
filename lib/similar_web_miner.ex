@@ -35,6 +35,14 @@ defmodule SimilarWebMiner do
     {:ok, records}
   end
 
+  defp extract_records(%{
+         "error_code" => error_code,
+         "error_message" => error_message,
+         "status" => "Error"
+       }) do
+    {:error, error_message}
+  end
+
   defp post_process_call(%HTTPoison.Response{body: body, status_code: 200}) do
     {:ok, body}
   end
