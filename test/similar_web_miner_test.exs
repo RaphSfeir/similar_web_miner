@@ -3,6 +3,11 @@ defmodule SimilarWebMinerTest do
   doctest SimilarWebMiner
   doctest SimilarWebMiner.Geography
 
+  @domain "gamekult.fr"
+  @no_protocol_url "www.gamekult.fr/test-dude/"
+  @https_protocol_url "https://www.gamekult.fr/test-dude"
+  @http_protocol_url "http://www.gamekult.fr/test-dude"
+
   @raw_geography_info_list [
     %{
       "country" => 250,
@@ -79,5 +84,17 @@ defmodule SimilarWebMinerTest do
              pages_per_visit: 3.4505905958407035,
              rank: 783
            }
+  end
+
+  test "extract geo repartition with various url http format" do
+    assert @domain == SimilarWebMiner.URL.host(@http_protocol_url)
+  end
+
+  test "extract geo repartition with various url https format" do
+    assert @domain == SimilarWebMiner.URL.host(@https_protocol_url)
+  end
+
+  test "extract geo repartition with various url no protocol format" do
+    assert @domain == SimilarWebMiner.URL.host(@no_protocol_url)
   end
 end

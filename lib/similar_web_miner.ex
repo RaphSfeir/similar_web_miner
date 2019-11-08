@@ -13,10 +13,11 @@ defmodule SimilarWebMiner do
   @api_uri "https://api.similarweb.com/v1/website"
 
   def geography_repartition(domain, start_date \\ "2019-07", end_date \\ "2019-08") do
+    clean_domain = SimilarWebMiner.URL.host(domain)
     api_key = get_api_key()
 
     url =
-      "#{@api_uri}/#{domain}/Geo/traffic-by-country?api_key=#{api_key}&start_date=#{start_date}&end_date=#{
+      "#{@api_uri}/#{clean_domain}/Geo/traffic-by-country?api_key=#{api_key}&start_date=#{start_date}&end_date=#{
         end_date
       }&main_domain_only=false"
 
