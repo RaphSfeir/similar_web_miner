@@ -50,6 +50,10 @@ defmodule SimilarWebMiner do
     {:ok, body}
   end
 
+  defp post_process_call(%HTTPoison.Response{body: body, status_code: status}) do
+    {:error, "HTTP #{status} : #{body}"}
+  end
+
   defp post_process_json_body(json_body) when is_binary(json_body) do
     Jason.decode(json_body)
   end
