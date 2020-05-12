@@ -4,7 +4,7 @@ defmodule SimilarWebMiner.MixProject do
   def project do
     [
       app: :similar_web_miner,
-      version: "0.1.3",
+      version: "0.1.4",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       package: package(),
@@ -43,7 +43,8 @@ defmodule SimilarWebMiner.MixProject do
     [
       licenses: ["MIT"],
       links: %{
-        "Similar Web API" => "https://www.similarweb.com/corp/developer/estimated_visits_api"
+        "Similar Web API" => "https://www.similarweb.com/corp/developer/estimated_visits_api",
+        "Github repo" => "https://github.com/RaphSfeir/similar_web_miner"
       }
     ]
   end
