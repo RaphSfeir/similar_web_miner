@@ -104,6 +104,7 @@ defmodule SimilarWebMiner do
   #
   # From a Date, get the first day of same month as date.
   defp get_first_of_month(date) do
-    Date.new(date.year, date.month, 1)
+    {:ok, d} = Date.new(date.year, date.month, 1)
+    d
   end
 end
