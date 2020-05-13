@@ -5,13 +5,17 @@ defmodule SimilarWebMiner do
   @moduledoc """
   Client for calls to the Similar Web API, regarding geography repartition (for now).
   """
+  @api_uri "https://api.similarweb.com/v1/website"
 
   @doc """
-  Similar Web Data Collector 
-
+  get the last 6 months with monthly granularity
   """
-
-  @api_uri "https://api.similarweb.com/v1/website"
+  def total_visits_last_months(domain) do
+    today = Date.utc_today()
+    end_date = get_first_of_month(today)
+    start_date = get_first_of_month(Date.add(today, -6 * 30))
+    total_visits(domain, start_date, end_date, "monthly")
+  end
 
   def total_visits(
         domain,
@@ -95,5 +99,11 @@ defmodule SimilarWebMiner do
 
   defp get_api_key do
     System.get_env("SIMILAR_WEB_API_TOKEN")
+  end
+
+  #
+  # From a Date, get the first day of same month as date.
+  defp get_first_of_month(date) do
+    Date.new(date.year, date.month, 1)
   end
 end
