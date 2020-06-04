@@ -12,7 +12,12 @@ defmodule SimilarWebMiner do
   """
   def total_visits_last_months(domain) do
     today = Date.utc_today()
-    end_date = get_first_of_month(Date.add(today, -1 * 30))
+    day_of_month = today.day
+    end_date = if day_of_month < 15 do
+      get_first_of_month(Date.add(today, -2 * 30))
+    else 
+      get_first_of_month(Date.add(today, -1 * 30))
+    end
     start_date = get_first_of_month(Date.add(today, -6 * 30))
     total_visits(domain, start_date, end_date, "monthly")
   end
