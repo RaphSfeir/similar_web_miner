@@ -33,7 +33,8 @@ defmodule SimilarWebMiner.MixProject do
   defp deps do
     [
       {:countries, "~> 1.5"},
-      {:httpoison, "~> 1.6"},
+      {:httpoison, "~> 1.8"},
+      {:csv, "~> 2.4"},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
       {:jason, "~> 1.2"}
     ]
