@@ -13,6 +13,11 @@ defmodule SimilarWebMiner.Traffic do
     |> Enum.map(&Traffic.extract_visit/1)
   end
 
+  def process_result_visitors(records) when is_list(records) do
+    records
+    |> Enum.map(&Traffic.extract_visitors/1)
+  end
+
   def extract_visit(
         _visit = %{
           "visits" => visits,
@@ -25,11 +30,6 @@ defmodule SimilarWebMiner.Traffic do
     }
   end
 
-  def process_result_visitors(records) when is_list(records) do
-    records
-    |> Enum.map(&Traffic.extract_visitors/1)
-  end
-
   def extract_visitors(
         _visit = %{
           "unique_visitors" => unique_visitors,
@@ -38,6 +38,18 @@ defmodule SimilarWebMiner.Traffic do
       ) do
     %{
       unique_visitors: unique_visitors,
+      date: Date.from_iso8601!(date)
+    }
+  end
+
+  def extract_values(
+        _visit = %{
+          "value" => value,
+          "date" => date
+        }
+      ) do
+    %{
+      value: value,
       date: Date.from_iso8601!(date)
     }
   end

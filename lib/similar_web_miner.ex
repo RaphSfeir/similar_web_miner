@@ -25,6 +25,32 @@ defmodule SimilarWebMiner do
     total_visits(domain, start_date, end_date, "monthly")
   end
 
+  def lead_enrichment_traffic_stats(
+        domain,
+        start_date \\ "2021-03",
+        end_date \\ "2021-05"
+      ) do
+    clean_domain = SimilarWebMiner.URL.host(domain)
+    api_key = get_api_key()
+
+    url =
+      "#{@api_uri}/#{clean_domain}/lead-enrichment/all?api_key=#{api_key}&start_date=#{start_date}&end_date=#{
+        end_date
+      }&country=world&main_domain_only=false&format=json"
+
+    with {:ok, call_result} <- HTTPoison.get(url),
+         {:ok, json_body} <- post_process_call(call_result),
+         {:ok, body} <- post_process_json_body(json_body) |> IO.inspect(),
+         {:ok, visits} <- extract_visits(body),
+         {:ok, visitors} <- extract_visitors(body),
+         monthly_visits <- visits |> Enum.map(&Traffic.extract_values/1),
+         visitors <- visitors |> Enum.map(&Traffic.extract_values/1) do
+      %{total_visits: monthly_visits, unique_visitors: visitors}
+    else
+      err -> {:error, err}
+    end
+  end
+
   def total_visits(
         domain,
         start_date \\ "2020-01",
