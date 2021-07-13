@@ -4,7 +4,7 @@ defmodule SimilarWebMiner.MixProject do
   def project do
     [
       app: :similar_web_miner,
-      version: "0.1.7",
+      version: "0.1.8",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       package: package(),
