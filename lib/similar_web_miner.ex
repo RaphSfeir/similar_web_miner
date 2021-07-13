@@ -6,6 +6,24 @@ defmodule SimilarWebMiner do
   Client for calls to the Similar Web API, regarding geography repartition (for now).
   """
   @api_uri "https://api.similarweb.com/v1/website"
+  @api_root "https://api.similarweb.com"
+
+  @doc """
+  Gets remaining hits, allowed country filters and available time periods for your account.
+
+  This endpoint does not cost any hits.
+  """
+  def capabilities() do
+    api_key = get_api_key()
+
+    url = "#{@api_root}/capabilities?api_key=#{api_key}"
+
+    with {:ok, call_result} <- HTTPoison.get(url),
+         {:ok, json_body} <- post_process_call(call_result),
+         {:ok, response} <- post_process_json_body(json_body) |> IO.inspect() do
+      response
+    end
+  end
 
   @doc """
   get the last 6 months with monthly granularity
