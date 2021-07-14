@@ -115,7 +115,7 @@ defmodule SimilarWebMiner do
     with {:ok, call_result} <- HTTPoison.get(url),
          {:ok, json_body} <- post_process_call(call_result),
          {:ok, body} <- post_process_json_body(json_body) do
-      {:ok, body}
+      {:ok, body |> Map.put("start_date", start_date) |> Map.put("end_date", end_date)}
     else
       err -> {:error, err}
     end
