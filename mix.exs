@@ -34,6 +34,7 @@ defmodule SimilarWebMiner.MixProject do
     [
       {:countries, "~> 1.5"},
       {:httpoison, "~> 1.8"},
+      {:timex, "~> 3.7"},
       {:csv, "~> 2.4"},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
       {:jason, "~> 1.2"}

@@ -30,14 +30,7 @@ defmodule SimilarWebMiner do
   """
   def total_visits_last_months(domain) do
     today = Date.utc_today()
-    day_of_month = today.day
-
-    end_date =
-      if day_of_month < 15 do
-        get_first_of_month(Date.add(today, -2 * 30))
-      else
-        get_first_of_month(Date.add(today, -1 * 30))
-      end
+    end_date = today |> get_end_date_from_today()
 
     start_date = get_first_of_month(Date.add(today, -6 * 30))
     total_visits(domain, start_date, end_date, "monthly")
@@ -45,14 +38,7 @@ defmodule SimilarWebMiner do
 
   def lead_enrichment_traffic_stats_last_months(domain) do
     today = Date.utc_today()
-    day_of_month = today.day
-
-    end_date =
-      if day_of_month < 15 do
-        get_first_of_month(Date.add(today, -2 * 30))
-      else
-        get_first_of_month(Date.add(today, -1 * 30))
-      end
+    end_date = today |> get_end_date_from_today()
 
     start_date = get_first_of_month(Date.add(today, -6 * 30))
     lead_enrichment_traffic_stats(domain, start_date, end_date)
@@ -60,14 +46,7 @@ defmodule SimilarWebMiner do
 
   def lead_enrichment_last_months(domain) do
     today = Date.utc_today()
-    day_of_month = today.day
-
-    end_date =
-      if day_of_month < 15 do
-        get_first_of_month(Date.add(today, -2 * 30))
-      else
-        get_first_of_month(Date.add(today, -1 * 30))
-      end
+    end_date = today |> get_end_date_from_today()
 
     start_date = get_first_of_month(Date.add(today, -6 * 30))
     lead_enrichment(domain, start_date, end_date)
@@ -262,6 +241,16 @@ defmodule SimilarWebMiner do
 
   defp get_api_key do
     System.get_env("SIMILAR_WEB_API_TOKEN")
+  end
+
+  def get_end_date_from_today(today) do
+    day_of_month = today.day
+
+    if day_of_month < 15 do
+      get_first_of_month(today |> Timex.shift(months: -2))
+    else
+      get_first_of_month(today |> Timex.shift(months: -1))
+    end
   end
 
   #
